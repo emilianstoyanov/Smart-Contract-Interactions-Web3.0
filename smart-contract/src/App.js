@@ -6,12 +6,12 @@ import { ethers } from "ethers";
 
 const API_KEY = "muZQr36vDyKnI9BAn76g4J10E9i3oNbn";
 const rpcUrl = `https://eth-sepolia.g.alchemy.com/v2/${API_KEY}`;
-
+const injected = injectedModule()
 
 
 // initialize Onboard
 init({
-  wallets: [injectedModule],
+  wallets: [injected],
   chains: [
     {
       id: "0xaa36a7",
@@ -25,7 +25,7 @@ init({
 function App() {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
 
-  
+
   return (
     <div className="App">
       <button
