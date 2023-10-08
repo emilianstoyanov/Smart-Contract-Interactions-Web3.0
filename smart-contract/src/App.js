@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
 
+import { init, useConnectWallet } from "@web3-onboard/react";
+import injectedModule from "@web3-onboard/injected-wallets";
+import { ethers } from "ethers";
+
+const API_KEY = "muZQr36vDyKnI9BAn76g4J10E9i3oNbn";
+const rpcUrl = `https://eth-sepolia.g.alchemy.com/v2/${API_KEY}`;
+
+
+
+// initialize Onboard
+init({
+  wallets: [injectedModule],
+  chains: [
+    {
+      id: "0xaa36a7",
+      token: "ETH",
+      label: "Ethereum Sepolia",
+      rpcUrl,
+    },
+  ],
+});
+  
 function App() {
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
+
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <button
+        disabled={connecting}
+        onClick={() => (wallet ? disconnect(wallet) : connect())}
         >
-          Learn React
-        </a>
-      </header>
+        {connecting ? "connecting" : wallet ? "disconnect" : "connect"}
+      </button>
+
     </div>
   );
 }
