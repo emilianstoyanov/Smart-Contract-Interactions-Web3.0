@@ -11,6 +11,9 @@ const injected = injectedModule()
 
 // initialize Onboard
 init({
+  connect: {
+    autoConnectLastWallet: true,
+  },
   wallets: [injected],
   chains: [
     {
