@@ -35,7 +35,9 @@ const ChainModal = ({ onDisconnect }) => {
     setChain({ chainId: chains[0].id })
       .then((res) => {
         if (!res) {
-          onDisconnect();
+          onDisconnect().catch((err) => {
+            console.error(err);
+          });
         }
 
         handleClose();
