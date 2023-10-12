@@ -346,6 +346,6 @@ export const ERC20_ABI = [
     },
   ];
   
-  export const ERC20_ADDRESS = "0x78EA62F328f5C7cc7EEd7dA2c04397A5ab11Ebfe";
+  export const ERC20_ADDRESS = "0x0dda494a4331285dc29f7fa6ca5709876a987564";
 
   
