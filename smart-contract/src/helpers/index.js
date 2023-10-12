@@ -1,4 +1,4 @@
-function formatEthAddress(address) {
+export function formatEthAddress(address) {
     if (!address || address.length < 8) {
         return "";
     }

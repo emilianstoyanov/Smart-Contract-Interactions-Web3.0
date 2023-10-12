@@ -26,7 +26,7 @@ const Navbar = ({ onDisconnect }) => {
   return (
     <div className='navbar'>
       <div className='navbar-left'>
-        <span className='navbar-label'>SoftUni</span>
+        <span className='navbar-label'>NavBar</span>
       </div>
       {wallet && (
         <>

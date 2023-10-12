@@ -1,5 +1,5 @@
 import './App.css';
-
+import Navbar from "./components/NavBar/NavBar";
 import { init, useConnectWallet } from "@web3-onboard/react";
 import injectedModule from "@web3-onboard/injected-wallets";
 // import { errors, ethers } from "ethers";
@@ -24,7 +24,16 @@ init({
       rpcUrl,
     },
   ],
+  accountCenter: {
+    desktop: {
+    enabled: false
+    },
+    mobile: {
+    enabled: false
+    }
+    }
 });
+
   
 function App() {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
@@ -43,6 +52,7 @@ function App() {
   if (wallet){
     return (
       <div className="App">
+        <Navbar onDisconnect={handleDisconnect} />
         <ChainModal onDisconnect={handleDisconnect} />
         <button
           disabled={connecting} onClick={() => disconnect(wallet)}
@@ -56,10 +66,9 @@ function App() {
   }
   return (
     <div className="App">
-      <button
-        disabled={connecting}
-        onClick={() => (wallet ? disconnect(wallet) : connect())}
-        >
+      <Navbar onDisconnect={handleDisconnect} />
+      <button disabled={connecting}
+        onClick={() => (wallet ? disconnect(wallet) : connect())}>
         {connecting ? "connecting" : "connect"}
       </button>
 
