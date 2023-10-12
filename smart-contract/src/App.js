@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from "./components/NavBar/NavBar";
+import Button from "./components/Button/Button";
 import { init, useConnectWallet } from "@web3-onboard/react";
 import injectedModule from "@web3-onboard/injected-wallets";
 // import { errors, ethers } from "ethers";
@@ -53,25 +54,28 @@ function App() {
     return (
       <div className="App">
         <Navbar onDisconnect={handleDisconnect} />
-        <ChainModal onDisconnect={handleDisconnect} />
-        <button
-          disabled={connecting} onClick={() => disconnect(wallet)}
-          >
-          {connecting ? "connecting" : "disconnect"}
-        </button>
-
+        <div className="main">
+          <ChainModal onDisconnect={handleDisconnect} />
+          <Button
+            disabled={connecting} 
+            handleClick={handleDisconnect}
+            text={"Disconnect"}
+            />
+        </div>
       </div>
     );
-
   }
+
   return (
     <div className="App">
       <Navbar onDisconnect={handleDisconnect} />
-      <button disabled={connecting}
-        onClick={() => (wallet ? disconnect(wallet) : connect())}>
-        {connecting ? "connecting" : "connect"}
-      </button>
-
+      <div className="main">
+        <Button 
+          disabled={connecting}
+          handleClick={() => connect(wallet)}
+          text={"Connect"}
+        />
+      </div>
     </div>
   );
 }
