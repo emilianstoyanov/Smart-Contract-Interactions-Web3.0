@@ -1,4 +1,6 @@
-import React, { useEffect } from "react";
+// import React, { useEffect } from "react";
+import React from "react";
+
 import "./SendForm.css";
 import { useWallets } from "@web3-onboard/react";
 
@@ -6,7 +8,7 @@ import { ethers } from "ethers";
 import { ERC20_ABI, ERC20_ADDRESS } from "../../constants";
 
 const SendForm = () => {
-  const [sendTo, setSendTo] = React.useState(null);
+  const [sendTo, setSendTo] = React.useState("");
   const [amount, setAmount] = React.useState(0);
   const [message, setMessage] = React.useState(null);
 
