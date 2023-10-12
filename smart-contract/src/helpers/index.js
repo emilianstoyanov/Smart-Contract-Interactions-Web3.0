@@ -8,3 +8,10 @@ export function formatEthAddress(address) {
 
     return `${firstFive}...${lastThree}`;
 }
+
+// export function getContract(connectedWallets) {
+//   const injectedProvider = connectedWallets[0].provider;
+//   const provider = new ethers.providers.Web3Provider(injectedProvider);
+//   const signer = provider.getSigner();
+//   return new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
+// }
