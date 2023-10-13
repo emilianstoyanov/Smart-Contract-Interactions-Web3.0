@@ -11,6 +11,26 @@ const SendForm = () => {
   const [sendTo, setSendTo] = React.useState("");
   const [amount, setAmount] = React.useState(0);
   const [message, setMessage] = React.useState(null);
+  const [banalce, setBalance] = React.useState(0);
+
+  useEffect(() => {
+    if (
+      connectedWallets &&
+      connectedWallets.length > 0 &&
+      connectedWallets[0].accounts.length > 0
+    ) {
+      const contract = getContract(connectedWallets);
+
+      contract
+        .balanceOf(connectedWallets[0].accounts[0].address)
+        .then((res) => {
+          setBalance(ethers.utils.formatUnits(res, 18));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [connectedWallets]);
 
   const connectedWallets = useWallets();
 
@@ -26,10 +46,6 @@ const SendForm = () => {
   const handleSend = (e) => {
     e.preventDefault();
 
-    const injectedProvider = connectedWallets[0].provider;
-    const provider = new ethers.providers.Web3Provider(injectedProvider);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer)
 
     contract
       .transfer(sendTo, amount)
