@@ -30,6 +30,7 @@ const TransfersSection = () => {
     });
   }, [connectedWallets]);
 
+
   return (
     <section className='transfers-section'>
       <h2>Transfers</h2>
