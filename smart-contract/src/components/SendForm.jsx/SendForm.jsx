@@ -1,10 +1,10 @@
-// import React, { useEffect } from "react";
-import React from "react";
+import React, { useEffect } from "react";
 
 import "./SendForm.css";
 import { useWallets } from "@web3-onboard/react";
 
 import { ethers } from "ethers";
+import { getContract } from "../../helpers";
 import { ERC20_ABI, ERC20_ADDRESS } from "../../constants";
 
 const SendForm = () => {
@@ -46,7 +46,7 @@ const SendForm = () => {
   const handleSend = (e) => {
     e.preventDefault();
 
-
+    const contract = getContract(connectedWallets);
     contract
       .transfer(sendTo, amount)
       .then((res) => {
@@ -110,43 +110,3 @@ function showMeesage(message) {
 
 export default SendForm;
 
-
-
-
-// useEffect(() => {
-//   if (
-//     connectedWallets &&
-//     connectedWallets.length > 0 &&
-//     connectedWallets[0].accounts.length > 0
-//   ) {
-//     const contract = getContract(connectedWallets);
-
-//     contract
-//       .balanceOf(connectedWallets[0].accounts[0].address)
-//       .then((res) => {
-//         setBalance(ethers.utils.formatUnits(res, 18));
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }
-// }, [connectedWallets]);
-
-// useEffect(() => {
-//   if (!connectedWallets || !sendTo || !amount) return;
-//   const contract = getContract(connectedWallets);
-
-//   console.log(sendTo);
-//   contract.estimateGas.transfer(sendTo, amount).then((_gasCost) => {
-//     console.log(_gasCost.toString());
-//     setGasCost(_gasCost.toString());
-//   });
-// }, [connectedWallets, sendTo, amount]);
-
-
-
-
-
-
-//   const contract = getContract(connectedWallets);
-  

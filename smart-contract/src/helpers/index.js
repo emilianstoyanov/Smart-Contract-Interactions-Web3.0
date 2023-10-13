@@ -1,3 +1,6 @@
+import { ethers } from "ethers";
+import { ERC20_ABI, ERC20_ADDRESS } from "../constants";
+
 export function formatEthAddress(address) {
     if (!address || address.length < 8) {
         return "";
@@ -15,3 +18,4 @@ export function getContract(connectedWallets) {
   const signer = provider.getSigner();
   return new ethers.Contract(ERC20_ADDRESS, ERC20_ABI, signer);
 }
+
