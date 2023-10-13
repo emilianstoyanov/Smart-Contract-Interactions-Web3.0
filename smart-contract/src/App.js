@@ -6,6 +6,7 @@ import injectedModule from "@web3-onboard/injected-wallets";
 // import { errors, ethers } from "ethers";
 import ChainModal from './components/ChainModal/ChainModal';
 import SendForm from './components/SendForm.jsx/SendForm';
+import EventModal from './components/EventModal/EventModal';
 
 const API_KEY = "muZQr36vDyKnI9BAn76g4J10E9i3oNbn";
 const rpcUrl = `https://eth-sepolia.g.alchemy.com/v2/${API_KEY}`;
@@ -57,6 +58,7 @@ function App() {
         <Navbar onDisconnect={handleDisconnect} />
         <div className="main">
           <ChainModal onDisconnect={handleDisconnect} />
+          <EventModal />
           <SendForm />
         </div>
       </div>
