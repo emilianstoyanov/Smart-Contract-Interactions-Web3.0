@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
-
 import "./SendForm.css";
 import { useWallets } from "@web3-onboard/react";
 
 import { ethers } from "ethers";
 import { getContract } from "../../helpers";
-import { ERC20_ABI, ERC20_ADDRESS } from "../../constants";
 
 const SendForm = () => {
+  const connectedWallets = useWallets();
+
   const [sendTo, setSendTo] = React.useState("");
   const [amount, setAmount] = React.useState(0);
   const [message, setMessage] = React.useState(null);
-  const [banalce, setBalance] = React.useState(0);
+  const [balance, setBalance] = React.useState("0");
 
   useEffect(() => {
     if (
@@ -32,8 +32,6 @@ const SendForm = () => {
     }
   }, [connectedWallets]);
 
-  const connectedWallets = useWallets();
-
   const handleSendToChange = (e) => {
     setSendTo(e.target.value);
   };
@@ -41,7 +39,6 @@ const SendForm = () => {
   const handleAmountChange = (e) => {
     setAmount(e.target.value);
   };
-
   
   const handleSend = (e) => {
     e.preventDefault();
@@ -77,7 +74,7 @@ function showMeesage(message) {
 
   return (
     <div className='form-wrapper'>
-      {/* <p>Balance: {balance} MTK</p> */}
+      <p>Balance: {balance} MTK</p>
       <form className='send-form' onSubmit={handleSend}>
         <div>
           <label htmlFor='sendTo'>Send to:</label>
@@ -109,4 +106,3 @@ function showMeesage(message) {
 };
 
 export default SendForm;
-
