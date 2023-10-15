@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import TransferCard from "./TransferCard/TransferCard.jsx";
 
 import "./TransferSection.css";
@@ -29,7 +29,6 @@ const TransfersSection = () => {
       setTransfers(fetchedTransfers);
     });
   }, [connectedWallets]);
-
 
   return (
     <section className='transfers-section'>

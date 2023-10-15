@@ -1,18 +1,21 @@
 import './App.css';
-import Navbar from "./components/NavBar/NavBar";
-import Button from "./components/Button/Button";
+
 import { init, useConnectWallet } from "@web3-onboard/react";
 import injectedModule from "@web3-onboard/injected-wallets";
-// import { errors, ethers } from "ethers";
+import walletConnectModule from '@web3-onboard/walletconnect';
+
 import ChainModal from './components/ChainModal/ChainModal';
+import Navbar from "./components/NavBar/NavBar";
+import Button from "./components/Button/Button";
 import SendForm from './components/SendForm.jsx/SendForm';
 import EventModal from './components/EventModal/EventModal';
 import TransfersSection from './components/TransferSection/TransferSection';
 
 const API_KEY = "muZQr36vDyKnI9BAn76g4J10E9i3oNbn";
 const rpcUrl = `https://eth-sepolia.g.alchemy.com/v2/${API_KEY}`;
-const injected = injectedModule()
 
+const injected = injectedModule();
+// const walletConnect = walletConnectModule();
 
 // initialize Onboard
 init({
@@ -30,17 +33,20 @@ init({
   ],
   accountCenter: {
     desktop: {
-    enabled: false
+      enabled: false,
     },
     mobile: {
-    enabled: false
-    }
-    }
+      enabled: false,
+      },
+    },
 });
-
   
 function App() {
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet()
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+
+  function handleConnect() {
+    connect();
+  }
 
   function handleDisconnect() {
     if (!wallet) {
@@ -52,8 +58,7 @@ function App() {
     });
   }
 
-
-  if (wallet){
+  if (wallet) {
     return (
       <div className="App">
         <Navbar onDisconnect={handleDisconnect} />
@@ -73,7 +78,7 @@ function App() {
       <div className="main">
         <Button 
           disabled={connecting}
-          handleClick={() => connect(wallet)}
+          handleClick={handleConnect}
           text={"Connect"}
         />
       </div>

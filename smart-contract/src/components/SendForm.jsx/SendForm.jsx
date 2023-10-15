@@ -12,7 +12,7 @@ const SendForm = () => {
   const [amount, setAmount] = React.useState(0);
   const [message, setMessage] = React.useState(null);
   const [balance, setBalance] = React.useState("0");
-  const [gasCost, setGasCost] = React.useState("0")
+  const [gasCost, setGasCost] = React.useState("0");
 
   useEffect(() => {
     if (
@@ -34,14 +34,13 @@ const SendForm = () => {
   }, [connectedWallets]);
 
   useEffect(() => {
-    if(!connectedWallets || !sendTo || !amount) return;
+    if (!connectedWallets || !sendTo || !amount) return;
     const contract = getContract(connectedWallets);
 
     contract.estimateGas.transfer(sendTo, amount).then((_gasCost) => {
       setGasCost(_gasCost.toString());
     });
   }, [connectedWallets, sendTo, amount]);
-
 
   const handleSendToChange = (e) => {
     setSendTo(e.target.value);
@@ -108,6 +107,7 @@ function showMeesage(message) {
           />
         </div>
         <label>Network Fee: {gasCost} WEI</label>
+        
         <button type='submit'>Send</button>
       </form>
       {message && <p>{message}</p>}
